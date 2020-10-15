@@ -1,0 +1,119 @@
+name: flutter_weather
+description: Flutter版假装看天气
+version: 1.4.0+18
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: 0.1.2
+  dio: 3.0.9
+  shared_preferences: 0.5.3+1
+  device_info: 0.4.0+2
+  intl: 0.16.1
+  url_launcher: 5.0.5
+  cached_network_image: 2.2.0+1
+  connectivity: 0.4.3+4
+  permission_handler: 3.1.0
+  package_info: 0.4.0+4
+  rxdart:  0.24.0
+  html: 0.14.0+2
+  webview_flutter: 0.3.21
+  flutter_colorpicker: 0.2.6
+  dragable_flutter_list: 1.0.2
+  flutter_linkify: 2.1.0
+  image_gallery_saver: 1.2.2
+  esys_flutter_share: 1.0.2
+  csv: 4.0.3
+  flutter_staggered_grid_view: 0.3.0
+  retry: 3.0.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    # 图片
+    - images/100.png
+    - images/101.png
+    - images/102.png
+    - images/103.png
+    - images/104.png
+    - images/200.png
+    - images/201.png
+    - images/202.png
+    - images/203.png
+    - images/204.png
+    - images/205.png
+    - images/206.png
+    - images/207.png
+    - images/208.png
+    - images/209.png
+    - images/210.png
+    - images/211.png
+    - images/212.png
+    - images/213.png
+    - images/300.png
+    - images/301.png
+    - images/302.png
+    - images/303.png
+    - images/304.png
+    - images/305.png
+    - images/306.png
+    - images/307.png
+    - images/308.png
+    - images/309.png
+    - images/310.png
+    - images/311.png
+    - images/312.png
+    - images/313.png
+    - images/400.png
+    - images/401.png
+    - images/402.png
+    - images/403.png
+    - images/404.png
+    - images/405.png
+    - images/406.png
+    - images/407.png
+    - images/500.png
+    - images/501.png
+    - images/502.png
+    - images/503.png
+    - images/504.png
+    - images/507.png
+    - images/508.png
+    - images/900.png
+    - images/901.png
+    - images/999.png
+    - images/splash.png
+    - images/air_soft_1.png
+    - images/air_soft_2.png
+    - images/air_soft_3.png
+    - images/air_soft_4.png
+    - images/air_soft_5.png
+    - images/air_soft_6.png
+    - images/air_soft_7.png
+    - images/air_soft_8.png
+    - images/drawer_bg.png
+    - images/loading.gif
+    - images/ic_boat_day.png
+    - images/ic_boat_night.png
+    - images/ic_cloud.png
+    - images/ic_fog_ground.png
+    - images/ic_hail_ground.png
+    - images/ic_haze_ground.png
+    - images/ic_rain_ground.png
+    - images/ic_sanstorm_ground.png
+    - images/ic_snow_ground.png
+    - images/nothing_here.gif
+    - images/hammer_share1.jpg
+    - images/hammer_share2.jpg
+    - images/hammer_share3.jpg
+    # assets
+    - assets/china-city-list.csv

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>109584894410-qhk2g6ahput8f56esa7nqisqok9t6a6v.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.109584894410-qhk2g6ahput8f56esa7nqisqok9t6a6v</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAavDbgSQHwIL2pJiL4dxbt8e917ym9TMo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>109584894410</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>co.Minki.flashChat</string>
+	<key>PROJECT_ID</key>
+	<string>flash-chat-db299</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flash-chat-db299.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:109584894410:ios:342e70677ca8bee21f6733</string>
+	<key>DATABASE_URL</key>
+	<string>https://flash-chat-db299.firebaseio.com</string>
+</dict>
+</plist>

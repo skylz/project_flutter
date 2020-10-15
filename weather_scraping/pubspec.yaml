@@ -1,0 +1,28 @@
+name: weather_scraping
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.12.1
+  html: ^0.14.0+3
+  cupertino_icons: ^0.1.3
+  verbal_expressions: ^0.4.0
+  carousel_slider: ^2.2.1
+  provider: ^4.3.1
+  flutter_svg: ^0.18.0
+  animations: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/dataset/weather_dict.json
