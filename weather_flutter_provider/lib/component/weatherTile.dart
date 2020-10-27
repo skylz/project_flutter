@@ -5,11 +5,6 @@ import '../screen/weatherScreen.dart';
 import '../getIt.dart';
 
 class WeatherTile extends StatelessWidget {
-  // final String locationName;
-  // final int locationCode;
-
-  // WeatherTile({this.locationName, this.locationCode});
-
   @override
   Widget build(BuildContext context) {
     final provider = getIt.get<WeatherProvider>();

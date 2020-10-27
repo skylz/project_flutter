@@ -40,7 +40,7 @@ class WeatherProvider with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   final _weatherhelper = WeatherApi();
-  final _streamController = StreamController<List<WeatherInfo>>();
+  final _streamController = StreamController<List<WeatherInfo>>.broadcast();
 
   Future<void> getWeatherInfo() async {
     final weatherResult =
