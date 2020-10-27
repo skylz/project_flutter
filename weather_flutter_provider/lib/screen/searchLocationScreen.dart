@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:weather_scraping/component/weatherTile.dart';
-import 'package:weather_scraping/services/loadJson.dart';
+import 'package:weather_scraping/provider/weatherProvider.dart';
+import '../getIt.dart';
 
 class SearchLoactionScreen extends StatefulWidget {
   static const String id = 'SearchLoactionScreen';
@@ -11,25 +11,15 @@ class SearchLoactionScreen extends StatefulWidget {
 
 class _SearchLoactionScreenState extends State<SearchLoactionScreen> {
   var _controller = TextEditingController();
+  final provider = getIt.get<WeatherProvider>();
 
-  List<String> locationList = [];
-  List<dynamic> locationCodeList = [];
-  List<String> filterLocationList = [];
-
-  Map<String, dynamic> weatherLocation;
-
-  void loadLocationData() async {
-    weatherLocation = await parseJson();
-    setState(() {
-      locationList = weatherLocation.keys.toList();
-      filterLocationList = locationList;
-      locationCodeList = weatherLocation.values.toList();
-    });
-  }
+  // ListView 출력을 위한 filterLocation
+  List<String> filterLocationList;
 
   @override
   void initState() {
-    loadLocationData();
+    provider.getLoadLocationData();
+    filterLocationList = provider.getLocationList();
     super.initState();
   }
 
@@ -62,7 +52,8 @@ class _SearchLoactionScreenState extends State<SearchLoactionScreen> {
                       )),
                   onChanged: (value) {
                     setState(() {
-                      filterLocationList = locationList
+                      filterLocationList = provider
+                          .getLocationList()
                           .where((location) => location.contains('$value'))
                           .toList();
                     });
@@ -75,13 +66,12 @@ class _SearchLoactionScreenState extends State<SearchLoactionScreen> {
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
-                  itemCount: filterLocationList.length,
+                  itemCount: (filterLocationList == null
+                      ? 0
+                      : filterLocationList.length),
                   itemBuilder: (BuildContext context, int index) {
-                    return WeatherTile(
-                      weatherList: filterLocationList,
-                      index: index,
-                      locationCodeList: locationCodeList,
-                    );
+                    provider.getNameCode(index);
+                    return WeatherTile();
                   },
                 ),
               )

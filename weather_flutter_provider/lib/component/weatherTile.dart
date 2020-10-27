@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
+import '../provider/weatherProvider.dart';
 import 'package:weather_scraping/screen/weatherScreen.dart';
 import '../screen/weatherScreen.dart';
+import '../getIt.dart';
 
 class WeatherTile extends StatelessWidget {
-  final List<String> weatherList;
-  final int index;
-  final List<dynamic> locationCodeList;
+  // final String locationName;
+  // final int locationCode;
 
-  WeatherTile({this.weatherList, this.index, this.locationCodeList});
+  // WeatherTile({this.locationName, this.locationCode});
 
   @override
   Widget build(BuildContext context) {
+    final provider = getIt.get<WeatherProvider>();
     return Card(
       child: ListTile(
-        title: Text('${weatherList[index]}'),
+        title: Text('${provider.locationName}'),
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => WeatherScreen(
-                        locationName: weatherList[index],
-                        locationCode: locationCodeList[index],
-                      )));
+          Navigator.pushNamed(context, WeatherScreen.id);
         },
       ),
     );

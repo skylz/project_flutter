@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:weather_scraping/getIt.dart';
 import 'package:weather_scraping/screen/home.dart';
 import 'package:weather_scraping/screen/searchLocationScreen.dart';
 import 'package:weather_scraping/screen/weatherScreen.dart';
 import 'package:provider/provider.dart';
 import './provider/weatherProvider.dart';
 
-// App의 최상단에 Provider 위치시킴.
-void main() => runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (_) => WeatherProvider())],
-    child: Weather()));
+void main() {
+  setup();
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => WeatherProvider())],
+      child: Weather()));
+}
 
 class Weather extends StatelessWidget {
   @override

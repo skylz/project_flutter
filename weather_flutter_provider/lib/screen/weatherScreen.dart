@@ -1,37 +1,23 @@
 import 'package:flutter/material.dart';
-import '../services/getTodayWeater.dart';
-import '../model/weatherModel.dart';
-import 'dart:async';
-import 'package:provider/provider.dart';
+import '../provider/weatherProvider.dart';
+import '../getIt.dart';
 
 class WeatherScreen extends StatefulWidget {
   static const String id = 'weatherScreen';
-  final String locationName;
-  final int locationCode;
-
-  WeatherScreen({this.locationName, this.locationCode});
 
   @override
   _WeatherScreenState createState() => _WeatherScreenState();
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  List<WeatherInfo> todayweather;
-  StreamController<List<WeatherInfo>> streamController = StreamController();
+  final provider = getIt.get<WeatherProvider>();
 
   @override
   void initState() {
     setState(() {
-      getget();
+      provider.getWeatherInfo();
     });
     super.initState();
-  }
-
-  // getget 함수에 provider를 적용해야함.
-  void getget() async {
-    todayweather =
-        await WeatherApi().getNowWeather(locationCode: widget.locationCode);
-    streamController.add(todayweather);
   }
 
   @override
@@ -39,11 +25,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(widget.locationName),
+        title: Text(provider.locationName),
       ),
       body: Center(
         child: StreamBuilder<Object>(
-            stream: streamController.stream,
+            stream: provider.weatherStreamController,
             builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -53,7 +39,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('지역 코드 : ${widget.locationCode}'),
+                    Text('지역 코드 : ${provider.locationCode}'),
                     Text('======================================='),
                     Text('time : ${snapshot.data[0].time}'),
                     Text('temp : ${snapshot.data[0].temp}'),
