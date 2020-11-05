@@ -54,6 +54,7 @@ class GetNews {
             content: newsContentsData));
       }
     }
+    // 결과적으로 newsData에 모든 정보가 다 담겨있는 구조.
     return newsData;
   }
 }
