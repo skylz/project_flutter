@@ -17,10 +17,31 @@ dependencies:
   provider: ^4.3.2+2
   google_fonts: ^1.1.1
   cupertino_icons: ^1.0.0
+  flutter_svg: ^0.19.1
+  sliding_up_panel: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
   uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/icons/
+
+fonts:
+    - family: SF UI
+      fonts:
+        - asset: assets/fonts/SF UI/sf-ui-text-regular.ttf
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
+    - family: SF Pro
+      fonts:
+        - asset: assets/fonts/SF Pro/SFProDisplay-Semibold.ttf
+          weight: 600

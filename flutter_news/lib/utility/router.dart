@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../screen/homeNewsScreen.dart';
-import '../screen/newsContentsScreen.dart';
+import '../screen/newsTitleScreen.dart';
 
 class GetXRouter {
   static final route = [
