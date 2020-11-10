@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../controller/newsController.dart';
-import 'dart:math';
+import '../model/newsModel.dart';
 
 class NewsTitleScreen extends StatelessWidget {
   // arguments of GetX Controller
   final NewsController _newsController = Get.put(NewsController());
   final int titleIndex = Get.arguments;
+  News newsData;
 
   @override
   Widget build(BuildContext context) {
+    newsData = _newsController.newsListData[titleIndex];
+
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -29,24 +32,22 @@ class NewsTitleScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 80),
               child: Text(
-                _newsController.newsListData[titleIndex].heading,
+                newsData.heading,
                 style: Theme.of(context)
                     .textTheme
                     .headline4
                     .copyWith(color: Colors.white, fontWeight: FontWeight.w300),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            _subTitle(context),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Text(
-                _newsController.newsListData[titleIndex].author,
+                newsData.author,
                 style: Theme.of(context)
                     .textTheme
                     .headline6
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.w100),
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.w300),
               ),
             ),
             Spacer(),
@@ -75,5 +76,23 @@ class NewsTitleScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _subTitle(BuildContext context) {
+    if (newsData.subheading != '') {
+      return Padding(
+        padding:
+            const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+        child: Text(
+          newsData.subheading == '' ? '' : newsData.subheading,
+          style: Theme.of(context)
+              .textTheme
+              .headline6
+              .copyWith(color: Colors.white, fontWeight: FontWeight.w300),
+        ),
+      );
+    } else {
+      return SizedBox(height: 10);
+    }
   }
 }

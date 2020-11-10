@@ -5,6 +5,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'newsTitleScreen.dart';
 import 'package:get/get.dart';
 import '../controller/newsController.dart';
+import '../components/panel.dart';
+import '../components/defaultPanel.dart';
 
 class NewsContentsScreen extends StatefulWidget {
   @override
@@ -20,6 +22,7 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
   News newsData;
 
   // for UI
+  // _fabHeight가 SlidingOnPanel의 높이임. 따라서 _fabHeight에 따라서 _panel이 바뀌게끔 해야함.
   double _fabHeight;
   double _panelHeightOpen;
   double _panelHeightClosed = 95.0;
@@ -45,7 +48,14 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
             parallaxEnabled: true,
             parallaxOffset: .5,
             body: NewsTitleScreen(),
-            panelBuilder: (sc) => _panel(sc),
+            panelBuilder: (sc) {
+              if (_fabHeight > _initFabHeight) {
+                return Panel(context: context, sc: sc);
+              } else {
+                return DefaultPanel(
+                    context: context, newsData: newsData, sc: sc);
+              }
+            },
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(18.0),
                 topRight: Radius.circular(18.0)),
@@ -57,71 +67,5 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
         ],
       ),
     );
-  }
-
-  Widget _panel(ScrollController sc) {
-    return MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: ListView(
-          controller: sc,
-          children: <Widget>[
-            SizedBox(
-              height: 12.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: 30,
-                  height: 5,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 20, left: 20),
-                    child: Text(
-                      "${newsData.content[0].substring(0, 24)}...",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 36,
-            ),
-            Expanded(
-                child: ListView.builder(
-                    controller: sc,
-                    shrinkWrap: true,
-                    itemCount:
-                        newsData.content == null ? 0 : newsData.content.length,
-                    itemBuilder: (context, index) {
-                      if (newsData.content != null) {
-                        return Card(
-                          child: Text(newsData.content[index]),
-                        );
-                      } else {
-                        return Card(
-                          child: Text('내용이 없습니다.'),
-                        );
-                      }
-                    })),
-          ],
-        ));
   }
 }
