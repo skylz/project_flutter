@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news/model/newsModel.dart';
+import 'package:flutter_news/screen/newsTitleScreen.dart';
+import 'package:get/get.dart';
 
 class Panel extends StatefulWidget {
   const Panel({
@@ -23,12 +25,22 @@ class _PanelState extends State<Panel> {
   @override
   Widget build(BuildContext context) {
     double _panelHeightOpen = MediaQuery.of(context).size.height * 1.0;
-    print(widget.fabHeight);
-    print(_panelHeightOpen);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        ),
         brightness: widget.fabHeight > _panelHeightOpen
             ? Brightness.light
             : Brightness.dark,
@@ -53,6 +65,7 @@ class _PanelState extends State<Panel> {
                   widget.newsData.heading,
                   style: Theme.of(context).textTheme.headline4.copyWith(
                       color: Colors.black, fontWeight: FontWeight.w300),
+                  softWrap: true,
                 )
               ],
             ),

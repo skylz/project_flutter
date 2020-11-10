@@ -4,19 +4,29 @@ import 'package:get/get.dart';
 import '../controller/newsController.dart';
 import '../model/newsModel.dart';
 
-class NewsTitleScreen extends StatelessWidget {
+class NewsTitleScreen extends StatefulWidget {
   // arguments of GetX Controller
+  @override
+  _NewsTitleScreenState createState() => _NewsTitleScreenState();
+}
+
+class _NewsTitleScreenState extends State<NewsTitleScreen> {
   final NewsController _newsController = Get.put(NewsController());
+
   final int titleIndex = Get.arguments;
+
   News newsData;
 
   @override
   Widget build(BuildContext context) {
     newsData = _newsController.newsListData[titleIndex];
-
     return Stack(
       fit: StackFit.expand,
       children: [
+        AppBar(
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+        ),
         // Image
         Image.asset(
           "assets/images/${_newsController.backGround}.png",
@@ -24,15 +34,16 @@ class NewsTitleScreen extends StatelessWidget {
         ),
         // Black Layer
         DecoratedBox(
-            decoration: BoxDecoration(color: Colors.black.withOpacity(0.5))),
+            decoration: BoxDecoration(color: Colors.black.withOpacity(0.4))),
         // MetaData
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 80),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 70),
               child: Text(
                 newsData.heading,
+                softWrap: true,
                 style: Theme.of(context)
                     .textTheme
                     .headline4

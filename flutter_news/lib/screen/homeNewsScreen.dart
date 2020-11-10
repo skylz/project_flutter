@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../services/getNews.dart';
 import '../controller/newsController.dart';
 import 'package:get/get.dart';
-import '../utility/router.dart';
 
 class HomeNewsScreen extends StatelessWidget {
   final NewsController _newsController = Get.put(NewsController());
