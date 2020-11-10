@@ -40,7 +40,7 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 70),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 100),
               child: Text(
                 newsData.heading,
                 softWrap: true,
@@ -52,7 +52,7 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
             ),
             _subTitle(context),
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 25, right: 25),
               child: Text(
                 newsData.author,
                 style: Theme.of(context)
@@ -93,7 +93,7 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
     if (newsData.subheading != '') {
       return Padding(
         padding:
-            const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            const EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 10),
         child: Text(
           newsData.subheading == '' ? '' : newsData.subheading,
           style: Theme.of(context)

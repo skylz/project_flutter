@@ -40,7 +40,6 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
     _panelHeightOpen = MediaQuery.of(context).size.height * 1.0;
     return Material(
       child: Stack(
-        alignment: Alignment.topCenter,
         children: <Widget>[
           SlidingUpPanel(
             maxHeight: _panelHeightOpen,

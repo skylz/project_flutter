@@ -15,7 +15,8 @@ class HomeNewsScreen extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
                 child: Obx(() => ListView.builder(

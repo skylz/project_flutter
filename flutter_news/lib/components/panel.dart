@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news/model/newsModel.dart';
-import 'package:flutter_news/screen/newsTitleScreen.dart';
 import 'package:get/get.dart';
 
 class Panel extends StatefulWidget {
@@ -57,19 +56,43 @@ class _PanelState extends State<Panel> {
           context: context,
           removeTop: true,
           child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+            padding: const EdgeInsets.only(left: 25, right: 25, top: 15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   widget.newsData.heading,
                   style: Theme.of(context).textTheme.headline4.copyWith(
                       color: Colors.black, fontWeight: FontWeight.w300),
                   softWrap: true,
-                )
+                ),
+                _subTitle(context),
+                Text(
+                  widget.newsData.author,
+                  style: Theme.of(context).textTheme.headline6.copyWith(
+                      color: Colors.black54, fontWeight: FontWeight.w300),
+                  softWrap: true,
+                ),
               ],
             ),
           )),
     );
+  }
+
+  _subTitle(BuildContext context) {
+    if (widget.newsData.subheading != '') {
+      return Padding(
+        padding: EdgeInsets.only(top: 15, bottom: 15),
+        child: Text(
+            widget.newsData.subheading == '' ? '' : widget.newsData.subheading,
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                .copyWith(color: Colors.black87, fontWeight: FontWeight.w300)),
+      );
+    } else {
+      return SizedBox(height: 15);
+    }
   }
 }
