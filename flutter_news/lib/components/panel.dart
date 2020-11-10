@@ -74,6 +74,24 @@ class _PanelState extends State<Panel> {
                       color: Colors.black54, fontWeight: FontWeight.w300),
                   softWrap: true,
                 ),
+                SizedBox(
+                  height: 30,
+                ),
+                Expanded(
+                    child: ListView.builder(
+                        controller: widget.sc,
+                        itemCount: widget.newsData.content.length,
+                        itemBuilder: (context, index) {
+                          if (widget.newsData.content != null) {
+                            return Card(
+                              child: Text(widget.newsData.content[index]),
+                            );
+                          } else {
+                            return Card(
+                              child: Text('내용이 없습니다.'),
+                            );
+                          }
+                        }))
               ],
             ),
           )),
