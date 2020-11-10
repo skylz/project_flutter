@@ -50,7 +50,12 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
             body: NewsTitleScreen(),
             panelBuilder: (sc) {
               if (_fabHeight > _initFabHeight) {
-                return Panel(context: context, sc: sc);
+                return Panel(
+                  context: context,
+                  newsData: newsData,
+                  sc: sc,
+                  fabHeight: _fabHeight,
+                );
               } else {
                 return DefaultPanel(
                     context: context, newsData: newsData, sc: sc);

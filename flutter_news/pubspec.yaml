@@ -40,12 +40,15 @@ flutter:
     - assets/icons/
 
 fonts:
-    - family: SF UI
+    - family: SFUI
       fonts:
-        - asset: assets/fonts/SF UI/sf-ui-text-regular.ttf
+        - asset: assets/fonts/sf-ui-text-regular.ttf
     #       - asset: fonts/Schyler-Italic.ttf
     #         style: italic
-    - family: SF Pro
+    - family: SFPro
       fonts:
-        - asset: assets/fonts/SF Pro/SFProDisplay-Semibold.ttf
+        - asset: assets/fonts/SFProDisplay-Semibold.ttf
           weight: 600
+    - family: DancingScript
+      fonts:
+        - asset: assets/fonts/Dancing Script.ttf
