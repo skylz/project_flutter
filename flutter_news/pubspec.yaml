@@ -19,6 +19,10 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_svg: ^0.19.1
   sliding_up_panel: ^1.0.2
+  # test
+  latlong: ^0.6.1
+  flutter_map: any
+  cached_network_image: ^2.3.3
 
 dev_dependencies:
   flutter_test:
