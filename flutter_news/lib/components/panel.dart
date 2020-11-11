@@ -19,10 +19,6 @@ class _PanelState extends State<Panel> {
   final int titleIndex = Get.arguments;
   News newsData;
 
-  // title, subtitle, date controller
-  bool closeTopContainer = false;
-  double topContainer = 0;
-
   // for UI
   double _panelHeightOpen = Get.height * 1.0;
 
@@ -30,20 +26,13 @@ class _PanelState extends State<Panel> {
   void initState() {
     newsData = _newsController.newsListData[titleIndex];
     super.initState();
-    widget.sc.addListener(() {
-      double value = widget.sc.offset / 119;
-      setState(() {
-        topContainer = value;
-        closeTopContainer = widget.sc.offset > 50;
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFFF3F5F7),
         elevation: 0,
         leading: Padding(
           padding: EdgeInsets.only(left: 10),
@@ -73,47 +62,38 @@ class _PanelState extends State<Panel> {
           context: context,
           removeTop: true,
           child: Container(
-            color: Colors.transparent,
+            color: Color(0xFFF3F5F7),
             child: Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 15),
+              padding: const EdgeInsets.only(left: 0, right: 0, top: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 200),
-                    opacity: closeTopContainer ? 0 : 1,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      width: Get.width,
-                      alignment: Alignment.topCenter,
-                      height: closeTopContainer ? 0 : Get.height * 0.3,
-                      child: Column(
-                        children: [
-                          Text(
-                            newsData.heading,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline4
-                                .copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w300),
-                            softWrap: true,
-                          ),
-                          _subTitle(context),
-                          Text(
-                            newsData.author,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w300),
-                            softWrap: true,
-                          ),
-                        ],
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    child: Text(
+                      newsData.heading,
+                      style: Theme.of(context).textTheme.headline4.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 26),
+                      softWrap: true,
                     ),
+                  ),
+                  _subTitle(context),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    child: Text(
+                      newsData.author,
+                      style: Theme.of(context).textTheme.headline6.copyWith(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 14.0),
+                      softWrap: true,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
                   ),
                   Expanded(
                       child: ListView.builder(
@@ -121,8 +101,29 @@ class _PanelState extends State<Panel> {
                           itemCount: newsData.content.length,
                           itemBuilder: (context, index) {
                             if (newsData.content != null) {
-                              return Card(
-                                child: Text(newsData.content[index]),
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: 15, left: 10, right: 10),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(15.0)),
+                                  elevation: 0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      newsData.content[index],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2
+                                          .copyWith(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w300,
+                                              letterSpacing: 2.0),
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ),
                               );
                             } else {
                               return Card(
@@ -140,12 +141,12 @@ class _PanelState extends State<Panel> {
   _subTitle(BuildContext context) {
     if (newsData.subheading != '') {
       return Padding(
-        padding: EdgeInsets.only(top: 15, bottom: 15),
+        padding: EdgeInsets.only(top: 10, bottom: 10, left: 25, right: 25),
         child: Text(newsData.subheading == '' ? '' : newsData.subheading,
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                .copyWith(color: Colors.black87, fontWeight: FontWeight.w300)),
+            style: Theme.of(context).textTheme.headline6.copyWith(
+                color: Colors.black87,
+                fontWeight: FontWeight.w300,
+                fontSize: 18.0)),
       );
     } else {
       return SizedBox(height: 15);

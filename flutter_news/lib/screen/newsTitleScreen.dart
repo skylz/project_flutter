@@ -15,10 +15,14 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
   final int titleIndex = Get.arguments;
   News newsData;
 
+  final List<String> singleQuotationText = [];
+
   @override
   void initState() {
-    newsData = _newsController.newsListData[titleIndex];
     super.initState();
+    newsData = _newsController.newsListData[titleIndex];
+    // 여기에 정규표현식 구현해야됨
+    void singleQuotation(News newdata) {}
   }
 
   @override

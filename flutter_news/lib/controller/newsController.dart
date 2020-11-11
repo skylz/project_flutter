@@ -7,7 +7,13 @@ import 'dart:math';
 class NewsController extends GetxController {
   var newsListData = List<News>().obs;
   var backGround;
-  List<String> photoList = ["oliagozha", "sunflower"];
+  List<String> photoList = [
+    "oliagozha",
+    "sunflower",
+    "michel",
+    "olga",
+    "oliagozha"
+  ];
 
   @override
   void onInit() {
@@ -29,7 +35,7 @@ class NewsController extends GetxController {
   }
 
   void getBackGroundImage() {
-    int randomNumber = Random().nextInt(2);
+    int randomNumber = Random().nextInt(photoList.length);
     backGround = photoList[randomNumber];
   }
 }
