@@ -12,14 +12,17 @@ class NewsTitleScreen extends StatefulWidget {
 
 class _NewsTitleScreenState extends State<NewsTitleScreen> {
   final NewsController _newsController = Get.put(NewsController());
-
   final int titleIndex = Get.arguments;
-
   News newsData;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     newsData = _newsController.newsListData[titleIndex];
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [

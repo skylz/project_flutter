@@ -24,7 +24,7 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
   // for UI
   // _fabHeight가 SlidingOnPanel의 높이임. 따라서 _fabHeight에 따라서 _panel이 바뀌게끔 해야함.
   double _fabHeight;
-  double _panelHeightOpen;
+  double _panelHeightOpen = Get.height * 1.0;
   double _panelHeightClosed = 95.0;
 
   @override
@@ -37,7 +37,6 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _panelHeightOpen = MediaQuery.of(context).size.height * 1.0;
     return Material(
       child: Stack(
         children: <Widget>[
@@ -51,13 +50,11 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
               if (_fabHeight > _initFabHeight) {
                 return Panel(
                   context: context,
-                  newsData: newsData,
                   sc: sc,
                   fabHeight: _fabHeight,
                 );
               } else {
-                return DefaultPanel(
-                    context: context, newsData: newsData, sc: sc);
+                return DefaultPanel(context: context, sc: sc);
               }
             },
             borderRadius: BorderRadius.only(
