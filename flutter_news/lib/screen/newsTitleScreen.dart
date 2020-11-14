@@ -15,14 +15,29 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
   final int titleIndex = Get.arguments;
   News newsData;
 
-  final List<String> singleQuotationText = [];
+  List<String> subSingleQuotationText = [];
+  final Map<String, dynamic> singleQuotationText = {};
 
   @override
   void initState() {
     super.initState();
     newsData = _newsController.newsListData[titleIndex];
-    // 여기에 정규표현식 구현해야됨
-    void singleQuotation(News newdata) {}
+    _singleQuotation(newsData.content);
+  }
+
+  void _singleQuotation(List<String> newsContent) {
+    print('_singleQuotation');
+    for (var i = 0; i < newsContent.length; i++) {
+      RegExp regExp = RegExp(r"((\‘|\'){1}(\S+)?(\s+)*(\S+)?(\’|\'){1})");
+      Iterable<Match> resSingleText = regExp.allMatches(newsContent[i]);
+      resSingleText.toList().forEach((element) {
+        print(element[0].toString());
+        subSingleQuotationText.add(element[0].toString());
+      });
+      singleQuotationText[i.toString()] = subSingleQuotationText;
+      subSingleQuotationText = [];
+    }
+    print(singleQuotationText);
   }
 
   @override
