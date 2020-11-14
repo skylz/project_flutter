@@ -15,8 +15,8 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
   final int titleIndex = Get.arguments;
   News newsData;
 
-  List<String> subSingleQuotationText = [];
-  final Map<String, dynamic> singleQuotationText = {};
+  // 작은 따옴표 안에 있는 단어들이 담겨있는 Map
+  Map<String, List<int>> singleQuotationText = {};
 
   @override
   void initState() {
@@ -27,18 +27,24 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
 
   void _singleQuotation(List<String> newsContent) {
     print('_singleQuotation');
+    // All tag 추가
+    singleQuotationText['All'] =
+        Iterable<int>.generate(newsContent.length).toList();
     for (var i = 0; i < newsContent.length; i++) {
+      // 작은 따옴표 안에 있는 단어를 추출하는 코드
       RegExp regExp = RegExp(r"((\‘|\'){1}(\S+)?(\s+)*(\S+)?(\’|\'){1})");
       Iterable<Match> resSingleText = regExp.allMatches(newsContent[i]);
+      // 추출된 단어들은 Map으로 변환하는 코드
       resSingleText.toList().forEach((element) {
-        print(element[0].toString());
-        subSingleQuotationText.add(element[0].toString());
+        addValueToMap(singleQuotationText, element[0].toString(), i);
       });
-      singleQuotationText[i.toString()] = subSingleQuotationText;
-      subSingleQuotationText = [];
     }
     print(singleQuotationText);
+    print(singleQuotationText.runtimeType);
   }
+
+  void addValueToMap<K, V>(Map<K, List<V>> map, K key, V value) =>
+      map.update(key, (list) => list..add(value), ifAbsent: () => [value]);
 
   @override
   Widget build(BuildContext context) {
