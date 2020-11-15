@@ -68,13 +68,7 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
   // Tags Data Model 생성
   void mapToTag(Map<String, List<int>> map) {
     map.keys.toList().forEach((element) {
-      if (element == '기사 전문') {
-        tagsData
-            .add(Tags(tag: element, indexList: map[element], isSelected: true));
-      } else {
-        tagsData.add(
-            Tags(tag: element, indexList: map[element], isSelected: false));
-      }
+      tagsData.add(Tags(tag: element, indexList: map[element]));
     });
   }
 

@@ -28,7 +28,7 @@ class _PanelState extends State<Panel> {
 
   // 태그 List
   List<String> tagList = [];
-  List<String> selectedTagList = [];
+  List<String> selectedTagList = ['기사 전문'];
   List tagListFilterChip = <Widget>[];
 
   @override
@@ -112,34 +112,37 @@ class _PanelState extends State<Panel> {
                             return Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: FilterChip(
-                                label: Text('${tagList[index]}'),
+                                label: Text('${widget.tagsData[index].tag}'),
                                 labelStyle: TextStyle(
-                                    color: widget.tagsData[index].isSelected
+                                    color: selectedTagList.contains(
+                                            widget.tagsData[index].tag)
                                         ? Colors.white
                                         : Colors.black),
-                                selected: widget.tagsData[index].isSelected,
+                                selected: selectedTagList
+                                    .contains(widget.tagsData[index].tag),
                                 onSelected: (bool selected) {
-                                  if (widget.tagsData[index].isSelected) {
-                                    selectedTagList
-                                        .remove(widget.tagsData[index].tag);
-                                  } else {
-                                    selectedTagList
-                                        .add(widget.tagsData[index].tag);
-                                  }
                                   if (index != 0) {
-                                    widget.tagsData[0].isSelected = false;
                                     selectedTagList
                                         .remove(widget.tagsData[0].tag);
+                                    if (selectedTagList
+                                        .contains(widget.tagsData[index].tag)) {
+                                      selectedTagList
+                                          .remove(widget.tagsData[index].tag);
+                                    } else {
+                                      selectedTagList
+                                          .add(widget.tagsData[index].tag);
+                                    }
+                                  } else {
+                                    selectedTagList = ['기사 전문'];
                                   }
                                   setState(() {
-                                    widget.tagsData[index].isSelected =
-                                        !widget.tagsData[index].isSelected;
+                                    // 기사전문만 있을 때 기사전문을 꺼짐 방지
                                     if (selectedTagList.length == 0) {
-                                      widget.tagsData[0].isSelected = true;
                                       selectedTagList
                                           .add(widget.tagsData[0].tag);
                                     }
                                   });
+                                  print(selectedTagList);
                                 },
                                 selectedColor: Theme.of(context).accentColor,
                                 checkmarkColor: Colors.white,
