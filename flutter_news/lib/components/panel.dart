@@ -108,27 +108,28 @@ class _PanelState extends State<Panel> {
                           scrollDirection: Axis.horizontal,
                           itemCount: tagList.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return FilterChip(
-                              label: Text('${tagList[index]}'),
-                              labelStyle: TextStyle(
-                                  color: widget.tagsData[index].isSelected
-                                      ? Colors.white
-                                      : Colors.black),
-                              selected: widget.tagsData[index].isSelected,
-                              onSelected: (bool selected) {
-                                setState(() {
-                                  widget.tagsData[index].isSelected =
-                                      !widget.tagsData[index].isSelected;
-                                });
-                              },
-                              selectedColor: Theme.of(context).accentColor,
-                              checkmarkColor: Colors.white,
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: FilterChip(
+                                label: Text('${tagList[index]}'),
+                                labelStyle: TextStyle(
+                                    color: widget.tagsData[index].isSelected
+                                        ? Colors.white
+                                        : Colors.black),
+                                selected: widget.tagsData[index].isSelected,
+                                onSelected: (bool selected) {
+                                  setState(() {
+                                    widget.tagsData[index].isSelected =
+                                        !widget.tagsData[index].isSelected;
+                                  });
+                                },
+                                selectedColor: Theme.of(context).accentColor,
+                                checkmarkColor: Colors.white,
+                              ),
                             );
                           })),
-                  SizedBox(
-                    height: 10,
-                  ),
                   Expanded(
+                      flex: 9,
                       child: ListView.builder(
                           controller: widget.sc,
                           itemCount: newsData.content.length,
