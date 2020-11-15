@@ -6,8 +6,8 @@ import 'dart:math';
 
 class NewsController extends GetxController {
   var newsListData = List<News>().obs;
-  // Map<String, List<int>> singleQuotationText = {}.obs;
   var backGround;
+
   List<String> photoList = [
     "oliagozha",
     "sunflower",
