@@ -28,6 +28,7 @@ class _PanelState extends State<Panel> {
 
   // 태그 List
   List<String> tagList = [];
+  List<String> selectedTagList = [];
   List tagListFilterChip = <Widget>[];
 
   @override
@@ -118,9 +119,26 @@ class _PanelState extends State<Panel> {
                                         : Colors.black),
                                 selected: widget.tagsData[index].isSelected,
                                 onSelected: (bool selected) {
+                                  if (widget.tagsData[index].isSelected) {
+                                    selectedTagList
+                                        .remove(widget.tagsData[index].tag);
+                                  } else {
+                                    selectedTagList
+                                        .add(widget.tagsData[index].tag);
+                                  }
+                                  if (index != 0) {
+                                    widget.tagsData[0].isSelected = false;
+                                    selectedTagList
+                                        .remove(widget.tagsData[0].tag);
+                                  }
                                   setState(() {
                                     widget.tagsData[index].isSelected =
                                         !widget.tagsData[index].isSelected;
+                                    if (selectedTagList.length == 0) {
+                                      widget.tagsData[0].isSelected = true;
+                                      selectedTagList
+                                          .add(widget.tagsData[0].tag);
+                                    }
                                   });
                                 },
                                 selectedColor: Theme.of(context).accentColor,
