@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../controller/newsController.dart';
 import '../components/panel.dart';
 import '../components/defaultPanel.dart';
+import '../model/tagModel.dart';
 
 class NewsContentsScreen extends StatefulWidget {
   @override
@@ -27,13 +28,40 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
   double _panelHeightOpen = Get.height * 1.0;
   double _panelHeightClosed = 95.0;
 
+  // 작은 따옴표 안에 있는 단어들이 담겨있는 Map
+  // singleQuotationText에 모든 정보가 다 담겨 있으므로 모든 페이지에서 해당 변수를 공유해야함.
+  Map<String, List<int>> singleQuotationText = {};
+
   @override
   void initState() {
     _newsController.getBackGroundImage();
     _fabHeight = _initFabHeight;
     newsData = _newsController.newsListData[titleIndex];
+    _singleQuotation(newsData.content);
     super.initState();
   }
+
+  void _singleQuotation(List<String> newsContent) {
+    // All tag 추가
+    singleQuotationText['기사 전문'] =
+        Iterable<int>.generate(newsContent.length).toList();
+    for (var i = 0; i < newsContent.length; i++) {
+      // 작은 따옴표 안에 있는 단어를 추출하는 코드
+      RegExp regExp = RegExp(r"((\‘|\'){1}(\S+)?(\s+)*(\S+)?(\’|\'){1})");
+      Iterable<Match> resSingleText = regExp.allMatches(newsContent[i]);
+      // 추출된 단어들은 Map으로 변환하는 코드
+      resSingleText.toList().forEach((element) {
+        addValueToMap(singleQuotationText,
+            element[0].replaceAll('‘', '').replaceAll('’', ''), i);
+      });
+    }
+    print(singleQuotationText);
+  }
+
+  void addValueToMap<K, V>(Map<K, List<V>> map, K key, V value) =>
+      map.update(key, (list) => list..add(value), ifAbsent: () => [value]);
+
+  //TODO: 기사전문은 default가 true 나머지는 false인 List<bool>이 필요하다.
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +73,14 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
             minHeight: _panelHeightClosed,
             parallaxEnabled: true,
             parallaxOffset: .5,
-            body: NewsTitleScreen(),
+            body: NewsTitleScreen(tagIndexMap: singleQuotationText),
             panelBuilder: (sc) {
               if (_fabHeight > _initFabHeight) {
                 return Panel(
                   context: context,
                   sc: sc,
                   fabHeight: _fabHeight,
+                  tagIndexMap: singleQuotationText,
                 );
               } else {
                 return DefaultPanel(context: context, sc: sc);

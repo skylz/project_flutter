@@ -5,7 +5,10 @@ import '../controller/newsController.dart';
 import '../model/newsModel.dart';
 
 class NewsTitleScreen extends StatefulWidget {
-  // arguments of GetX Controller
+  final Map<String, List<int>> tagIndexMap;
+
+  NewsTitleScreen({this.tagIndexMap});
+
   @override
   _NewsTitleScreenState createState() => _NewsTitleScreenState();
 }
@@ -15,43 +18,22 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
   final int titleIndex = Get.arguments;
   News newsData;
 
-  // 작은 따옴표 안에 있는 단어들이 담겨있는 Map
-  Map<String, List<int>> singleQuotationText = {};
-
   // 태그 List
+  List<String> tagList = [];
   List tagListWidget = <Widget>[];
 
   @override
   void initState() {
-    super.initState();
     newsData = _newsController.newsListData[titleIndex];
-    _singleQuotation(newsData.content);
-    tagListWrap(singleQuotationText.keys.toList());
+    tagList = widget.tagIndexMap.keys.toList().sublist(1);
+    // tag를 글자 길이 순으로 정렬.
+    tagList.sort((a, b) => a.length.compareTo(b.length));
+    tagListWrap(tagList);
+    super.initState();
   }
-
-  void _singleQuotation(List<String> newsContent) {
-    print('_singleQuotation');
-    // All tag 추가
-    singleQuotationText['기사 전문'] =
-        Iterable<int>.generate(newsContent.length).toList();
-    for (var i = 0; i < newsContent.length; i++) {
-      // 작은 따옴표 안에 있는 단어를 추출하는 코드
-      RegExp regExp = RegExp(r"((\‘|\'){1}(\S+)?(\s+)*(\S+)?(\’|\'){1})");
-      Iterable<Match> resSingleText = regExp.allMatches(newsContent[i]);
-      // 추출된 단어들은 Map으로 변환하는 코드
-      resSingleText.toList().forEach((element) {
-        addValueToMap(singleQuotationText, element[0].toString(), i);
-      });
-    }
-    print(singleQuotationText);
-    print(singleQuotationText.keys.toList());
-  }
-
-  void addValueToMap<K, V>(Map<K, List<V>> map, K key, V value) =>
-      map.update(key, (list) => list..add(value), ifAbsent: () => [value]);
 
   void tagListWrap(List<String> tagList) {
-    for (int i = 1; i < tagList.length; i++) {
+    for (int i = 0; i < tagList.length; i++) {
       var tag = tagList[i];
       tagListWidget.add(
         Container(
@@ -116,12 +98,12 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
             ),
             // Tag가 들어갈 자리
             Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
               child: Wrap(
                 direction: Axis.horizontal,
                 alignment: WrapAlignment.start,
-                spacing: 20,
-                runSpacing: 20,
+                spacing: 10,
+                runSpacing: 10,
                 children: tagListWidget,
               ),
             ),
@@ -146,7 +128,7 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
             ),
             SizedBox(
               height: Get.height * 0.12,
-            )
+            ),
           ],
         ),
       ],

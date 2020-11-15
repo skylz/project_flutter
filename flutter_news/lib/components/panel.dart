@@ -7,8 +7,9 @@ class Panel extends StatefulWidget {
   final BuildContext context;
   final ScrollController sc;
   final double fabHeight;
+  final Map<String, List<int>> tagIndexMap;
 
-  Panel({this.context, this.sc, this.fabHeight});
+  Panel({this.context, this.sc, this.fabHeight, this.tagIndexMap});
 
   @override
   _PanelState createState() => _PanelState();
@@ -22,9 +23,19 @@ class _PanelState extends State<Panel> {
   // for UI
   double _panelHeightOpen = Get.height * 1.0;
 
+  // 태그 List
+  List<String> tagList = [];
+  List tagListFilterChip = <Widget>[];
+
+  // 나중에 이거 지워
+  bool isSelected = true;
+
   @override
   void initState() {
     newsData = _newsController.newsListData[titleIndex];
+    tagList = widget.tagIndexMap.keys.toList().sublist(1);
+    tagList.sort((a, b) => a.length.compareTo(b.length));
+    tagList.insert(0, "기사전문");
     super.initState();
   }
 
@@ -92,8 +103,28 @@ class _PanelState extends State<Panel> {
                       softWrap: true,
                     ),
                   ),
+                  Expanded(
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: tagList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return FilterChip(
+                              label: Text('${tagList[index]}'),
+                              labelStyle: TextStyle(
+                                  color:
+                                      isSelected ? Colors.white : Colors.black),
+                              selected: isSelected,
+                              onSelected: (bool selected) {
+                                setState(() {
+                                  isSelected = !isSelected;
+                                });
+                              },
+                              selectedColor: Theme.of(context).accentColor,
+                              checkmarkColor: Colors.white,
+                            );
+                          })),
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Expanded(
                       child: ListView.builder(
