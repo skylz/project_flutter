@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news/model/newsModel.dart';
 import 'package:get/get.dart';
 import '../controller/newsController.dart';
+import '../model/tagModel.dart';
 
 class Panel extends StatefulWidget {
   final BuildContext context;
   final ScrollController sc;
   final double fabHeight;
   final Map<String, List<int>> tagIndexMap;
+  final List<Tags> tagsData;
 
-  Panel({this.context, this.sc, this.fabHeight, this.tagIndexMap});
+  Panel(
+      {this.context, this.sc, this.fabHeight, this.tagIndexMap, this.tagsData});
 
   @override
   _PanelState createState() => _PanelState();
@@ -26,9 +29,6 @@ class _PanelState extends State<Panel> {
   // 태그 List
   List<String> tagList = [];
   List tagListFilterChip = <Widget>[];
-
-  // 나중에 이거 지워
-  bool isSelected = true;
 
   @override
   void initState() {
@@ -111,12 +111,14 @@ class _PanelState extends State<Panel> {
                             return FilterChip(
                               label: Text('${tagList[index]}'),
                               labelStyle: TextStyle(
-                                  color:
-                                      isSelected ? Colors.white : Colors.black),
-                              selected: isSelected,
+                                  color: widget.tagsData[index].isSelected
+                                      ? Colors.white
+                                      : Colors.black),
+                              selected: widget.tagsData[index].isSelected,
                               onSelected: (bool selected) {
                                 setState(() {
-                                  isSelected = !isSelected;
+                                  widget.tagsData[index].isSelected =
+                                      !widget.tagsData[index].isSelected;
                                 });
                               },
                               selectedColor: Theme.of(context).accentColor,

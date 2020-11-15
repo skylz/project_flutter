@@ -22,6 +22,9 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
   // Contain All News Data
   News newsData;
 
+  // Tag Data Model
+  List<Tags> tagsData = [];
+
   // for UI
   // _fabHeight가 SlidingOnPanel의 높이임. 따라서 _fabHeight에 따라서 _panel이 바뀌게끔 해야함.
   double _fabHeight;
@@ -38,6 +41,7 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
     _fabHeight = _initFabHeight;
     newsData = _newsController.newsListData[titleIndex];
     _singleQuotation(newsData.content);
+    mapToTag(singleQuotationText);
     super.initState();
   }
 
@@ -61,7 +65,18 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
   void addValueToMap<K, V>(Map<K, List<V>> map, K key, V value) =>
       map.update(key, (list) => list..add(value), ifAbsent: () => [value]);
 
-  //TODO: 기사전문은 default가 true 나머지는 false인 List<bool>이 필요하다.
+  // Tags Data Model 생성
+  void mapToTag(Map<String, List<int>> map) {
+    map.keys.toList().forEach((element) {
+      if (element == '기사 전문') {
+        tagsData
+            .add(Tags(tag: element, indexList: map[element], isSelected: true));
+      } else {
+        tagsData.add(
+            Tags(tag: element, indexList: map[element], isSelected: false));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +96,7 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
                   sc: sc,
                   fabHeight: _fabHeight,
                   tagIndexMap: singleQuotationText,
+                  tagsData: tagsData,
                 );
               } else {
                 return DefaultPanel(context: context, sc: sc);
