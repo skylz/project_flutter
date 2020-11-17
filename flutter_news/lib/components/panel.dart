@@ -30,6 +30,7 @@ class _PanelState extends State<Panel> {
   List<String> tagList = [];
   List<String> selectedTagList = ['기사 전문'];
   List<int> tagIndexList = [];
+  List<int> tagIndexListForListBuilder = [];
 
   @override
   void initState() {
@@ -37,6 +38,7 @@ class _PanelState extends State<Panel> {
     tagList = widget.tagIndexMap.keys.toList().sublist(1);
     tagList.sort((a, b) => a.length.compareTo(b.length));
     tagList.insert(0, "기사전문");
+    tagIndexListForListBuilder = widget.tagsData[0].indexList;
     super.initState();
   }
 
@@ -165,6 +167,8 @@ class _PanelState extends State<Panel> {
                                     print(selectedTagList);
                                     print('tagIndexList : ');
                                     print(tagIndexList);
+                                    tagIndexListForListBuilder =
+                                        tagIndexList.toSet().toList();
                                   },
                                   selectedColor: Theme.of(context).accentColor,
                                   checkmarkColor: Colors.white,
@@ -179,9 +183,9 @@ class _PanelState extends State<Panel> {
                       flex: 20,
                       child: ListView.builder(
                           controller: widget.sc,
-                          itemCount: newsData.content.length,
+                          itemCount: tagIndexListForListBuilder.length,
                           itemBuilder: (context, index) {
-                            if (newsData.content != null) {
+                            if (tagIndexListForListBuilder != null) {
                               return Padding(
                                 padding: const EdgeInsets.only(
                                     bottom: 15, left: 20, right: 20),
@@ -193,7 +197,8 @@ class _PanelState extends State<Panel> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
                                     child: Text(
-                                      newsData.content[index],
+                                      newsData.content[
+                                          tagIndexListForListBuilder[index]],
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText2
