@@ -59,16 +59,18 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
             element[0].replaceAll('‘', '').replaceAll('’', ''), i);
       });
     }
-    print(singleQuotationText);
   }
 
+  // value map data 생성
   void addValueToMap<K, V>(Map<K, List<V>> map, K key, V value) =>
       map.update(key, (list) => list..add(value), ifAbsent: () => [value]);
 
   // Tags Data Model 생성
+  // indexList는 index 중복을 제거하여 추가
   void mapToTag(Map<String, List<int>> map) {
     map.keys.toList().forEach((element) {
-      tagsData.add(Tags(tag: element, indexList: map[element]));
+      tagsData
+          .add(Tags(tag: element, indexList: map[element].toSet().toList()));
     });
   }
 

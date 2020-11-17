@@ -29,7 +29,7 @@ class _PanelState extends State<Panel> {
   // 태그 List
   List<String> tagList = [];
   List<String> selectedTagList = ['기사 전문'];
-  List tagListFilterChip = <Widget>[];
+  List<int> tagIndexList = [];
 
   @override
   void initState() {
@@ -94,7 +94,8 @@ class _PanelState extends State<Panel> {
                   ),
                   _subTitle(context),
                   Padding(
-                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    padding: const EdgeInsets.only(
+                        left: 25, right: 25, top: 0, bottom: 15),
                     child: Text(
                       newsData.author,
                       style: Theme.of(context).textTheme.headline6.copyWith(
@@ -105,52 +106,77 @@ class _PanelState extends State<Panel> {
                     ),
                   ),
                   Expanded(
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: tagList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: FilterChip(
-                                label: Text('${widget.tagsData[index].tag}'),
-                                labelStyle: TextStyle(
-                                    color: selectedTagList.contains(
-                                            widget.tagsData[index].tag)
-                                        ? Colors.white
-                                        : Colors.black),
-                                selected: selectedTagList
-                                    .contains(widget.tagsData[index].tag),
-                                onSelected: (bool selected) {
-                                  if (index != 0) {
-                                    selectedTagList
-                                        .remove(widget.tagsData[0].tag);
-                                    if (selectedTagList
-                                        .contains(widget.tagsData[index].tag)) {
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: tagList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                                child: FilterChip(
+                                  label: Text('${widget.tagsData[index].tag}'),
+                                  labelStyle: TextStyle(
+                                      color: selectedTagList.contains(
+                                              widget.tagsData[index].tag)
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 12),
+                                  selected: selectedTagList
+                                      .contains(widget.tagsData[index].tag),
+                                  onSelected: (bool selected) {
+                                    if (index != 0) {
+                                      if (tagIndexList.length ==
+                                          widget.tagsData[0].indexList.length) {
+                                        tagIndexList = [];
+                                      }
                                       selectedTagList
-                                          .remove(widget.tagsData[index].tag);
+                                          .remove(widget.tagsData[0].tag);
+                                      if (selectedTagList.contains(
+                                          widget.tagsData[index].tag)) {
+                                        selectedTagList
+                                            .remove(widget.tagsData[index].tag);
+                                        widget.tagsData[index].indexList
+                                            .forEach(
+                                                (e) => tagIndexList.remove(e));
+                                      } else {
+                                        selectedTagList
+                                            .add(widget.tagsData[index].tag);
+                                        tagIndexList = tagIndexList +
+                                            widget.tagsData[index].indexList;
+                                      }
                                     } else {
-                                      selectedTagList
-                                          .add(widget.tagsData[index].tag);
+                                      selectedTagList = ['기사 전문'];
+                                      tagIndexList =
+                                          widget.tagsData[0].indexList;
                                     }
-                                  } else {
-                                    selectedTagList = ['기사 전문'];
-                                  }
-                                  setState(() {
-                                    // 기사전문만 있을 때 기사전문을 꺼짐 방지
-                                    if (selectedTagList.length == 0) {
-                                      selectedTagList
-                                          .add(widget.tagsData[0].tag);
-                                    }
-                                  });
-                                  print(selectedTagList);
-                                },
-                                selectedColor: Theme.of(context).accentColor,
-                                checkmarkColor: Colors.white,
-                              ),
-                            );
-                          })),
+                                    setState(() {
+                                      if (selectedTagList.length == 0) {
+                                        selectedTagList
+                                            .add(widget.tagsData[0].tag);
+                                        // 해결
+                                        tagIndexList =
+                                            widget.tagsData[0].indexList;
+                                      }
+                                    });
+                                    print('selectedTagList : ');
+                                    print(selectedTagList);
+                                    print('tagIndexList : ');
+                                    print(tagIndexList);
+                                  },
+                                  selectedColor: Theme.of(context).accentColor,
+                                  checkmarkColor: Colors.white,
+                                ),
+                              );
+                            }),
+                      )),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Expanded(
-                      flex: 9,
+                      flex: 20,
                       child: ListView.builder(
                           controller: widget.sc,
                           itemCount: newsData.content.length,
@@ -158,21 +184,21 @@ class _PanelState extends State<Panel> {
                             if (newsData.content != null) {
                               return Padding(
                                 padding: const EdgeInsets.only(
-                                    bottom: 15, left: 10, right: 10),
+                                    bottom: 15, left: 20, right: 20),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(15.0)),
                                   elevation: 0,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding: const EdgeInsets.all(20.0),
                                     child: Text(
                                       newsData.content[index],
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText2
                                           .copyWith(
-                                              fontSize: 18.0,
+                                              fontSize: 16.0,
                                               fontWeight: FontWeight.w300,
                                               letterSpacing: 2.0),
                                       softWrap: true,
