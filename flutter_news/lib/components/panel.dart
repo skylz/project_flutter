@@ -3,7 +3,7 @@ import 'package:flutter_news/model/newsModel.dart';
 import 'package:get/get.dart';
 import '../controller/newsController.dart';
 import '../model/tagModel.dart';
-import 'package:substring_highlight/substring_highlight.dart';
+import '../library/subString_highlight.dart';
 
 class Panel extends StatefulWidget {
   final BuildContext context;
@@ -164,10 +164,10 @@ class _PanelState extends State<Panel> {
                                             widget.tagsData[0].indexList;
                                       }
                                     });
-                                    print('selectedTagList : ');
-                                    print(selectedTagList);
-                                    print('tagIndexList : ');
-                                    print(tagIndexList);
+                                    // print('selectedTagList : ');
+                                    // print(selectedTagList);
+                                    // print('tagIndexList : ');
+                                    // print(tagIndexList);
                                     tagIndexListForListBuilder =
                                         tagIndexList.toSet().toList();
                                   },
@@ -201,21 +201,36 @@ class _PanelState extends State<Panel> {
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(20.0),
-                                      child: Text(
-                                        newsData.content[
+                                      child: SubstringHighlight(
+                                        text: newsData.content[
                                             tagIndexListForListBuilder[index]],
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2
-                                            .copyWith(
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w300,
-                                                letterSpacing: 2.0),
-                                        softWrap: true,
+                                        term: "‘바로번역’",
+                                        textStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w300,
+                                            letterSpacing: 2.0),
+                                        textStyleHighlight: TextStyle(
+                                            fontStyle: FontStyle.normal,
+                                            color: Colors.deepOrangeAccent,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16.0),
                                       ),
+                                      // child: Text(
+                                      //   newsData.content[
+                                      //       tagIndexListForListBuilder[index]],
+                                      // style: Theme.of(context)
+                                      //     .textTheme
+                                      //     .bodyText2
+                                      //     .copyWith(
+                                      //         fontSize: 16.0,
+                                      //         fontWeight: FontWeight.w300,
+                                      //         letterSpacing: 2.0),
+                                      // softWrap: true,
                                     ),
                                   ),
                                 ),
+                                // ),
                               );
                             } else {
                               return Card(
