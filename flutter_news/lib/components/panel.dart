@@ -3,6 +3,7 @@ import 'package:flutter_news/model/newsModel.dart';
 import 'package:get/get.dart';
 import '../controller/newsController.dart';
 import '../model/tagModel.dart';
+import 'package:substring_highlight/substring_highlight.dart';
 
 class Panel extends StatefulWidget {
   final BuildContext context;
@@ -194,19 +195,24 @@ class _PanelState extends State<Panel> {
                                       borderRadius:
                                           BorderRadius.circular(15.0)),
                                   elevation: 0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Text(
-                                      newsData.content[
-                                          tagIndexListForListBuilder[index]],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText2
-                                          .copyWith(
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.w300,
-                                              letterSpacing: 2.0),
-                                      softWrap: true,
+                                  child: InkWell(
+                                    onTap: () {
+                                      print('누름');
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Text(
+                                        newsData.content[
+                                            tagIndexListForListBuilder[index]],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText2
+                                            .copyWith(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w300,
+                                                letterSpacing: 2.0),
+                                        softWrap: true,
+                                      ),
                                     ),
                                   ),
                                 ),
