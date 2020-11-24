@@ -269,16 +269,28 @@ class _PanelState extends State<Panel> {
                                                       tagIndexListForListBuilder[
                                                           index]];
 
-                                                  // hearCount 개수 조절
-                                                  _heartFill[
-                                                          tagIndexListForListBuilder[
-                                                              index]]
-                                                      ? heartCount[
-                                                          tagIndexListForListBuilder[
-                                                              index]]++
-                                                      : heartCount[
-                                                          tagIndexListForListBuilder[
-                                                              index]]--;
+                                                  // heartCount 증가 및 Histroy에 데이터 추가
+                                                  if (_heartFill[
+                                                      tagIndexListForListBuilder[
+                                                          index]]) {
+                                                    heartCount[
+                                                        tagIndexListForListBuilder[
+                                                            index]]++;
+                                                    _newsController.newsHistory
+                                                        .add(newsData.content[
+                                                            tagIndexListForListBuilder[
+                                                                index]]);
+                                                  } else {
+                                                    heartCount[
+                                                        tagIndexListForListBuilder[
+                                                            index]]--;
+                                                    _newsController.newsHistory
+                                                        .remove(newsData
+                                                                .content[
+                                                            tagIndexListForListBuilder[
+                                                                index]]);
+                                                  }
+
                                                   setState(() {
                                                     _heartState[
                                                         tagIndexListForListBuilder[

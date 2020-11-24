@@ -11,6 +11,16 @@ class HomeNewsScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('DashBoard'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20, top: 5),
+            child: InkWell(
+                onTap: () {
+                  Get.toNamed('historyContents');
+                },
+                child: Icon(Icons.assignment_outlined)),
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(16),

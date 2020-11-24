@@ -8,6 +8,7 @@ import '../model/tagModel.dart';
 class NewsController extends GetxController {
   var newsListData = List<News>().obs;
   var newsTagData = List<Tags>().obs;
+  var newsHistory = List<String>().obs;
   var backGround;
 
   List<String> photoList = [
