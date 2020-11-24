@@ -33,6 +33,11 @@ class _PanelState extends State<Panel> {
   List<int> tagIndexList = [];
   List<int> tagIndexListForListBuilder = [];
 
+  // 좋아요 State
+  List<bool> _heartFill = [];
+  List<bool> _heartState = [];
+  List<int> heartCount = [];
+
   @override
   void initState() {
     newsData = _newsController.newsListData[titleIndex];
@@ -40,6 +45,14 @@ class _PanelState extends State<Panel> {
     tagList.sort((a, b) => a.length.compareTo(b.length));
     tagList.insert(0, "기사전문");
     tagIndexListForListBuilder = widget.tagsData[0].indexList;
+
+    // 문단별 heart를 채우기 위함.
+    tagIndexListForListBuilder.forEach((element) {
+      _heartFill.add(false);
+      _heartState.add(true);
+      heartCount.add(35);
+    });
+
     super.initState();
   }
 
@@ -159,7 +172,6 @@ class _PanelState extends State<Panel> {
                                       if (selectedTagList.length == 0) {
                                         selectedTagList
                                             .add(widget.tagsData[0].tag);
-                                        // 해결
                                         tagIndexList =
                                             widget.tagsData[0].indexList;
                                       }
@@ -197,36 +209,107 @@ class _PanelState extends State<Panel> {
                                   elevation: 0,
                                   child: InkWell(
                                     onTap: () {
-                                      print('누름');
+                                      print(
+                                          '길이 : ${tagIndexListForListBuilder.length}');
+                                      print('댓글 페이지로 이동');
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: SubstringHighlight(
-                                        text: newsData.content[
-                                            tagIndexListForListBuilder[index]],
-                                        term: "‘바로번역’",
-                                        textStyle: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w300,
-                                            letterSpacing: 2.0),
-                                        textStyleHighlight: TextStyle(
-                                            fontStyle: FontStyle.normal,
-                                            color: Colors.deepOrangeAccent,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.0),
-                                      ),
-                                      // child: Text(
-                                      //   newsData.content[
-                                      //       tagIndexListForListBuilder[index]],
-                                      // style: Theme.of(context)
-                                      //     .textTheme
-                                      //     .bodyText2
-                                      //     .copyWith(
-                                      //         fontSize: 16.0,
-                                      //         fontWeight: FontWeight.w300,
-                                      //         letterSpacing: 2.0),
-                                      // softWrap: true,
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(18.0),
+                                          child: SubstringHighlight(
+                                            text: newsData.content[
+                                                tagIndexListForListBuilder[
+                                                    index]],
+                                            term:
+                                                "‘${selectedTagList.last.toString()}’",
+                                            termListLength:
+                                                selectedTagList.length,
+                                            textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w300,
+                                                letterSpacing: 2.0),
+                                            textStyleHighlight: TextStyle(
+                                                fontStyle: FontStyle.normal,
+                                                color: Colors.deepOrangeAccent,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 20, right: 20),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Row(
+                                                  children: [
+                                                    Icon(Icons.comment_outlined,
+                                                        color: Colors.black45),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text('187'),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  // heart 채울지 말지 결정
+                                                  _heartFill[
+                                                      tagIndexListForListBuilder[
+                                                          index]] = _heartState[
+                                                      tagIndexListForListBuilder[
+                                                          index]];
+
+                                                  // hearCount 개수 조절
+                                                  _heartFill[
+                                                          tagIndexListForListBuilder[
+                                                              index]]
+                                                      ? heartCount[
+                                                          tagIndexListForListBuilder[
+                                                              index]]++
+                                                      : heartCount[
+                                                          tagIndexListForListBuilder[
+                                                              index]]--;
+                                                  setState(() {
+                                                    _heartState[
+                                                        tagIndexListForListBuilder[
+                                                            index]] = !_heartState[
+                                                        tagIndexListForListBuilder[
+                                                            index]];
+                                                  });
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Icon(
+                                                      _heartFill[
+                                                              tagIndexListForListBuilder[
+                                                                  index]]
+                                                          ? Icons.favorite
+                                                          : Icons
+                                                              .favorite_border,
+                                                      color: Colors.red,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                        '${heartCount[tagIndexListForListBuilder[index]]}'),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),

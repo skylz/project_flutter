@@ -55,6 +55,8 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
       Iterable<Match> resSingleText = regExp.allMatches(newsContent[i]);
       // 추출된 단어들은 Map으로 변환하는 코드
       resSingleText.toList().forEach((element) {
+        // newsContents의 element를 bold처리
+
         addValueToMap(singleQuotationText,
             element[0].replaceAll('‘', '').replaceAll('’', ''), i);
       });
@@ -69,8 +71,10 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
   // indexList는 index 중복을 제거하여 추가
   void mapToTag(Map<String, List<int>> map) {
     map.keys.toList().forEach((element) {
-      tagsData
-          .add(Tags(tag: element, indexList: map[element].toSet().toList()));
+      tagsData.add(Tags(
+        tag: element,
+        indexList: map[element].toSet().toList(),
+      ));
     });
   }
 

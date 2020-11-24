@@ -45,13 +45,13 @@ class GetNews {
             heading: newsHeadingData[2],
             subheading: newsHeadingData[3],
             author: newsHeadingData[4],
-            content: newsContentsData));
+            content: newsContentsData,));
       } else {
         newsData.add(News(
             heading: newsHeadingData[2],
             subheading: '',
             author: newsHeadingData[3],
-            content: newsContentsData));
+            content: newsContentsData,));
       }
     }
     // 결과적으로 newsData에 모든 정보가 다 담겨있는 구조.

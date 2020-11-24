@@ -5,5 +5,10 @@ class News {
   final String author;
   final List<String> content;
 
-  News({this.heading, this.subheading, this.author, this.content});
+  News({
+    this.heading,
+    this.subheading,
+    this.author,
+    this.content,
+  });
 }
