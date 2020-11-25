@@ -41,7 +41,7 @@ class _HistoryContentsState extends State<HistoryContents> {
                         alignment: Alignment.topCenter,
                         child: ListView.builder(
                             shrinkWrap: true,
-                            reverse: true,
+                            reverse: false,
                             itemCount: _newsController.newsHistory.length,
                             itemBuilder: (context, index) {
                               return Padding(
@@ -68,7 +68,7 @@ class _HistoryContentsState extends State<HistoryContents> {
                                             padding: const EdgeInsets.only(
                                                 left: 4, bottom: 4),
                                             child: Text(
-                                                '${_newsController.newsHistory[index].heading}',
+                                                '${_newsController.newsHistory[_newsController.newsHistory.length - index - 1].heading}',
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headline4
@@ -82,7 +82,7 @@ class _HistoryContentsState extends State<HistoryContents> {
                                             padding: const EdgeInsets.only(
                                                 left: 4, bottom: 20),
                                             child: Text(
-                                                '${_newsController.newsHistory[index].author}',
+                                                '${_newsController.newsHistory[_newsController.newsHistory.length - index - 1].author}',
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headline4
@@ -93,7 +93,7 @@ class _HistoryContentsState extends State<HistoryContents> {
                                                         fontSize: 12)),
                                           ),
                                           Text(
-                                              '${_newsController.newsHistory[index].historyContents}',
+                                              '${_newsController.newsHistory[_newsController.newsHistory.length - index - 1].historyContents}',
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16.0,
