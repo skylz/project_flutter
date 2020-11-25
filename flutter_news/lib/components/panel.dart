@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/model/newsHistoryModel.dart';
 import 'package:flutter_news/model/newsModel.dart';
 import 'package:get/get.dart';
 import '../controller/newsController.dart';
 import '../model/tagModel.dart';
 import '../library/subString_highlight.dart';
+import '../screen/homeNewsScreen.dart';
 
 class Panel extends StatefulWidget {
   final BuildContext context;
@@ -57,7 +59,7 @@ class _PanelState extends State<Panel> {
               color: Colors.black,
             ),
             onPressed: () {
-              Get.back();
+              Get.off(HomeNewsScreen());
             },
           ),
         ),
@@ -163,10 +165,6 @@ class _PanelState extends State<Panel> {
                                             widget.tagsData[0].indexList;
                                       }
                                     });
-                                    // print('selectedTagList : ');
-                                    // print(selectedTagList);
-                                    // print('tagIndexList : ');
-                                    // print(tagIndexList);
                                     tagIndexListForListBuilder =
                                         tagIndexList.toSet().toList();
                                   },
@@ -256,31 +254,48 @@ class _PanelState extends State<Panel> {
                                                       tagIndexListForListBuilder[
                                                           index]];
 
-                                                  // heartCount 증가 및 Histroy에 데이터 추가
                                                   if (newsData.heartFill[
                                                       tagIndexListForListBuilder[
                                                           index]]) {
+                                                    print('더하기');
+
+                                                    // heartCount 증가
                                                     newsData.heartCount[
                                                         tagIndexListForListBuilder[
                                                             index]]++;
+
+                                                    // Histroy에 데이터 추가
                                                     _newsController.newsHistory
-                                                        .add(_newsController
-                                                                .newsListData[
-                                                                    titleIndex]
-                                                                .content[
-                                                            tagIndexListForListBuilder[
-                                                                index]]);
+                                                        .add(NewsHistory(
+                                                            heading: newsData
+                                                                .heading,
+                                                            author:
+                                                                newsData.author,
+                                                            historyContents: _newsController
+                                                                    .newsListData[
+                                                                        titleIndex]
+                                                                    .content[
+                                                                tagIndexListForListBuilder[
+                                                                    index]],
+                                                            routeIndex:
+                                                                titleIndex));
                                                   } else {
+                                                    print('빼기');
+                                                    // heartCount 감소
                                                     newsData.heartCount[
                                                         tagIndexListForListBuilder[
                                                             index]]--;
+
+                                                    // Histroy에 데이터 제거
                                                     _newsController.newsHistory
-                                                        .remove(_newsController
-                                                                .newsListData[
-                                                                    titleIndex]
-                                                                .content[
-                                                            tagIndexListForListBuilder[
-                                                                index]]);
+                                                        .removeWhere((item) =>
+                                                            item.historyContents ==
+                                                            _newsController
+                                                                    .newsListData[
+                                                                        titleIndex]
+                                                                    .content[
+                                                                tagIndexListForListBuilder[
+                                                                    index]]);
                                                   }
 
                                                   setState(() {

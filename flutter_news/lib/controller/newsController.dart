@@ -4,11 +4,12 @@ import '../model/newsModel.dart';
 import '../services/getNews.dart';
 import 'dart:math';
 import '../model/tagModel.dart';
+import '../model/newsHistoryModel.dart';
 
 class NewsController extends GetxController {
   var newsListData = List<News>().obs;
   var newsTagData = List<Tags>().obs;
-  var newsHistory = List<String>().obs;
+  var newsHistory = List<NewsHistory>().obs;
   var backGround;
 
   List<String> photoList = [
@@ -32,7 +33,6 @@ class NewsController extends GetxController {
             barrierDismissible: false));
     try {
       newsListData.value = await GetNews().getNews();
-      newsHistory.value = [];
       Get.back();
     } catch (e) {
       print(e);
