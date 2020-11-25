@@ -33,6 +33,7 @@ class _HistoryContentsState extends State<HistoryContents> {
                   itemCount: _newsController.newsHistory.length,
                   itemBuilder: (context, index) {
                     if (_newsController.newsHistory.length != 0) {
+                      print('if');
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Card(
@@ -52,14 +53,12 @@ class _HistoryContentsState extends State<HistoryContents> {
                                         fontWeight: FontWeight.w300,
                                         letterSpacing: 2.0)),
                               ),
-                              // SizedBox(
-                              //   height: 20,
-                              // )
                             ],
                           ),
                         ),
                       );
                     } else {
+                      print('else');
                       return Center(
                         child: Text('History가 없습니다.'),
                       );

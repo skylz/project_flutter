@@ -32,6 +32,7 @@ class NewsController extends GetxController {
             barrierDismissible: false));
     try {
       newsListData.value = await GetNews().getNews();
+      newsHistory.value = [];
       Get.back();
     } catch (e) {
       print(e);

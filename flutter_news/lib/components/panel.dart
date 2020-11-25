@@ -264,7 +264,10 @@ class _PanelState extends State<Panel> {
                                                         tagIndexListForListBuilder[
                                                             index]]++;
                                                     _newsController.newsHistory
-                                                        .add(newsData.content[
+                                                        .add(_newsController
+                                                                .newsListData[
+                                                                    titleIndex]
+                                                                .content[
                                                             tagIndexListForListBuilder[
                                                                 index]]);
                                                   } else {
@@ -272,7 +275,9 @@ class _PanelState extends State<Panel> {
                                                         tagIndexListForListBuilder[
                                                             index]]--;
                                                     _newsController.newsHistory
-                                                        .remove(newsData
+                                                        .remove(_newsController
+                                                                .newsListData[
+                                                                    titleIndex]
                                                                 .content[
                                                             tagIndexListForListBuilder[
                                                                 index]]);
@@ -302,7 +307,7 @@ class _PanelState extends State<Panel> {
                                                       width: 5,
                                                     ),
                                                     Text(
-                                                        '${newsData.heartCount[tagIndexListForListBuilder[index]]}'),
+                                                        '${_newsController.newsListData[titleIndex].heartCount[tagIndexListForListBuilder[index]]}'),
                                                   ],
                                                 ),
                                               ),

@@ -8,8 +8,9 @@ class HomeNewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF3F5F7),
       appBar: AppBar(
+        elevation: 0,
         title: Text('DashBoard'),
         actions: [
           Padding(

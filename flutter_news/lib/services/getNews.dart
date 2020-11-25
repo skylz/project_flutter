@@ -10,16 +10,16 @@ class GetNews {
   List<String> newsHeadingData = [];
   List<String> newsContentsData = [];
 
-  // news 문단별 heartState를 관리하는 과정
-  List<bool> _heartFill = [];
-  List<bool> _heartState = [];
-  List<int> _heartCount = [];
-
   // Line을 나눠주는 라이브러리
   LineSplitter ls = LineSplitter();
 
   Future<List<News>> getNews() async {
     for (var i = 1; i < 11; i++) {
+      // news 문단별 heartState를 관리하는 과정
+      List<bool> _heartFill = [];
+      List<bool> _heartState = [];
+      List<int> _heartCount = [];
+
       final String url = 'https://minkithub.github.io/2020/11/04/news$i/';
       final http.Response response = await http.get(url);
       dom.Document document = parser.parse(response.body);
