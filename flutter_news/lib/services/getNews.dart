@@ -10,6 +10,11 @@ class GetNews {
   List<String> newsHeadingData = [];
   List<String> newsContentsData = [];
 
+  // news 문단별 heartState를 관리하는 과정
+  List<bool> _heartFill = [];
+  List<bool> _heartState = [];
+  List<int> _heartCount = [];
+
   // Line을 나눠주는 라이브러리
   LineSplitter ls = LineSplitter();
 
@@ -39,19 +44,31 @@ class GetNews {
       });
       newsContentsData.removeWhere((value) => value == '');
 
+      newsContentsData.forEach((element) {
+        _heartFill.add(false);
+        _heartState.add(true);
+        _heartCount.add(35);
+      });
+
       // subheading이 없는 뉴스들이 있음.
       if (newsHeadingData.length == 5) {
         newsData.add(News(
             heading: newsHeadingData[2],
             subheading: newsHeadingData[3],
             author: newsHeadingData[4],
-            content: newsContentsData,));
+            content: newsContentsData,
+            heartFill: _heartFill,
+            heartState: _heartState,
+            heartCount: _heartCount));
       } else {
         newsData.add(News(
             heading: newsHeadingData[2],
             subheading: '',
             author: newsHeadingData[3],
-            content: newsContentsData,));
+            content: newsContentsData,
+            heartFill: _heartFill,
+            heartState: _heartState,
+            heartCount: _heartCount));
       }
     }
     // 결과적으로 newsData에 모든 정보가 다 담겨있는 구조.

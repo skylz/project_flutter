@@ -33,11 +33,6 @@ class _PanelState extends State<Panel> {
   List<int> tagIndexList = [];
   List<int> tagIndexListForListBuilder = [];
 
-  // 좋아요 State
-  List<bool> _heartFill = [];
-  List<bool> _heartState = [];
-  List<int> heartCount = [];
-
   @override
   void initState() {
     newsData = _newsController.newsListData[titleIndex];
@@ -45,14 +40,6 @@ class _PanelState extends State<Panel> {
     tagList.sort((a, b) => a.length.compareTo(b.length));
     tagList.insert(0, "기사전문");
     tagIndexListForListBuilder = widget.tagsData[0].indexList;
-
-    // 문단별 heart를 채우기 위함.
-    tagIndexListForListBuilder.forEach((element) {
-      _heartFill.add(false);
-      _heartState.add(true);
-      heartCount.add(35);
-    });
-
     super.initState();
   }
 
@@ -263,17 +250,17 @@ class _PanelState extends State<Panel> {
                                               InkWell(
                                                 onTap: () {
                                                   // heart 채울지 말지 결정
-                                                  _heartFill[
+                                                  newsData.heartFill[
                                                       tagIndexListForListBuilder[
-                                                          index]] = _heartState[
+                                                          index]] = newsData.heartState[
                                                       tagIndexListForListBuilder[
                                                           index]];
 
                                                   // heartCount 증가 및 Histroy에 데이터 추가
-                                                  if (_heartFill[
+                                                  if (newsData.heartFill[
                                                       tagIndexListForListBuilder[
                                                           index]]) {
-                                                    heartCount[
+                                                    newsData.heartCount[
                                                         tagIndexListForListBuilder[
                                                             index]]++;
                                                     _newsController.newsHistory
@@ -281,7 +268,7 @@ class _PanelState extends State<Panel> {
                                                             tagIndexListForListBuilder[
                                                                 index]]);
                                                   } else {
-                                                    heartCount[
+                                                    newsData.heartCount[
                                                         tagIndexListForListBuilder[
                                                             index]]--;
                                                     _newsController.newsHistory
@@ -292,17 +279,18 @@ class _PanelState extends State<Panel> {
                                                   }
 
                                                   setState(() {
-                                                    _heartState[
-                                                        tagIndexListForListBuilder[
-                                                            index]] = !_heartState[
-                                                        tagIndexListForListBuilder[
-                                                            index]];
+                                                    newsData.heartState[
+                                                            tagIndexListForListBuilder[
+                                                                index]] =
+                                                        !newsData.heartState[
+                                                            tagIndexListForListBuilder[
+                                                                index]];
                                                   });
                                                 },
                                                 child: Row(
                                                   children: [
                                                     Icon(
-                                                      _heartFill[
+                                                      newsData.heartFill[
                                                               tagIndexListForListBuilder[
                                                                   index]]
                                                           ? Icons.favorite
@@ -314,7 +302,7 @@ class _PanelState extends State<Panel> {
                                                       width: 5,
                                                     ),
                                                     Text(
-                                                        '${heartCount[tagIndexListForListBuilder[index]]}'),
+                                                        '${newsData.heartCount[tagIndexListForListBuilder[index]]}'),
                                                   ],
                                                 ),
                                               ),
