@@ -32,14 +32,48 @@ class HomeNewsScreen extends StatelessWidget {
             Expanded(
                 child: Obx(() => ListView.builder(
                     itemCount: _newsController.newsListData.length,
-                    itemBuilder: (context, index) => ListTile(
-                          title:
-                              Text(_newsController.newsListData[index].heading),
-                          subtitle: Text(
-                              _newsController.newsListData[index].subheading),
-                          onTap: () {
-                            Get.toNamed('newsContentsScreen', arguments: index);
-                          },
+                    itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, bottom: 10, left: 8, right: 8),
+                              child: ListTile(
+                                title: Text(
+                                    _newsController.newsListData[index].heading,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline4
+                                        .copyWith(
+                                            color: Colors.black87,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16)),
+                                subtitle: _newsController
+                                            .newsListData[index].subheading !=
+                                        ''
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Text(
+                                            '${_newsController.newsListData[index].subheading},',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline4
+                                                .copyWith(
+                                                    color: Colors.black87,
+                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: 14)),
+                                      )
+                                    : null,
+                                onTap: () {
+                                  Get.toNamed('newsContentsScreen',
+                                      arguments: index);
+                                },
+                              ),
+                            ),
+                          ),
                         ))))
           ],
         ),
