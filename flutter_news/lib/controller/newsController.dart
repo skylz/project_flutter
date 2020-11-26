@@ -12,13 +12,7 @@ class NewsController extends GetxController {
   var newsHistory = List<NewsHistory>().obs;
   var backGround;
 
-  List<String> photoList = [
-    "oliagozha",
-    "sunflower",
-    "michel",
-    "olga",
-    "oliagozha"
-  ];
+  List<String> photoList = ["money", "newspaper", "hoseini", "seoul"];
 
   @override
   void onInit() {

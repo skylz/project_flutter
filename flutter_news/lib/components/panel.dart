@@ -193,11 +193,6 @@ class _PanelState extends State<Panel> {
                                           BorderRadius.circular(15.0)),
                                   elevation: 0,
                                   child: InkWell(
-                                    onTap: () {
-                                      print(
-                                          '길이 : ${tagIndexListForListBuilder.length}');
-                                      print('댓글 페이지로 이동');
-                                    },
                                     child: Column(
                                       children: [
                                         Padding(
@@ -214,12 +209,13 @@ class _PanelState extends State<Panel> {
                                                 color: Colors.black,
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w300,
-                                                letterSpacing: 2.0),
+                                                letterSpacing: 1.5),
                                             textStyleHighlight: TextStyle(
                                                 fontStyle: FontStyle.normal,
                                                 color: Colors.deepOrangeAccent,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 16.0),
+                                                fontSize: 16.0,
+                                                height: 1.3),
                                           ),
                                         ),
                                         Padding(
@@ -230,7 +226,18 @@ class _PanelState extends State<Panel> {
                                                 MainAxisAlignment.end,
                                             children: [
                                               InkWell(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  Get.toNamed('commentScreen',
+                                                      arguments: [
+                                                        newsData.content[
+                                                            tagIndexListForListBuilder[
+                                                                index]],
+                                                        newsData,
+                                                        tagIndexListForListBuilder[
+                                                            index],
+                                                        titleIndex
+                                                      ]);
+                                                },
                                                 child: Row(
                                                   children: [
                                                     Icon(Icons.comment_outlined,
@@ -257,8 +264,6 @@ class _PanelState extends State<Panel> {
                                                   if (newsData.heartFill[
                                                       tagIndexListForListBuilder[
                                                           index]]) {
-                                                    print('더하기');
-
                                                     // heartCount 증가
                                                     newsData.heartCount[
                                                         tagIndexListForListBuilder[
@@ -280,7 +285,6 @@ class _PanelState extends State<Panel> {
                                                             routeIndex:
                                                                 titleIndex));
                                                   } else {
-                                                    print('빼기');
                                                     // heartCount 감소
                                                     newsData.heartCount[
                                                         tagIndexListForListBuilder[
