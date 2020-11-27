@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../controller/newsController.dart';
 import '../model/newsModel.dart';
 import '../model/newsHistoryModel.dart';
+import 'package:readmore/readmore.dart';
 
 class CommentScreen extends StatefulWidget {
   @override
@@ -88,13 +89,22 @@ class _CommentScreenState extends State<CommentScreen> {
                       borderRadius: BorderRadius.circular(15)),
                   child: Padding(
                     padding: const EdgeInsets.all(0.0),
-                    child: Text('$textContent',
+                    child: ReadMoreText('$textContent',
                         style: Theme.of(context).textTheme.headline4.copyWith(
                             color: Colors.black87,
                             fontWeight: FontWeight.w400,
                             fontSize: 16,
                             letterSpacing: 1.2,
-                            height: 1.3)),
+                            height: 1.3),
+                        trimLines: 6,
+                        colorClickableText: Colors.pink,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: '펼치기',
+                        trimExpandedText: '접기',
+                        moreStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.pink)),
                   ),
                 ),
                 SizedBox(
@@ -116,7 +126,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                 newsData.heartFill[contentsIndex]
                                     ? Icons.favorite
                                     : Icons.favorite_border,
-                                color: Colors.red,
+                                color: Colors.pink,
                                 size: 25,
                               ),
                               onTap: () {
@@ -160,7 +170,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                     .textTheme
                                     .headline4
                                     .copyWith(
-                                        color: Colors.red,
+                                        color: Colors.pink,
                                         fontWeight: FontWeight.w400,
                                         fontSize: 18,
                                         letterSpacing: 1.5,
@@ -178,7 +188,7 @@ class _CommentScreenState extends State<CommentScreen> {
                           children: [
                             Icon(
                               Icons.chat_outlined,
-                              color: Colors.red,
+                              color: Colors.pink,
                               size: 25,
                             ),
                             SizedBox(
@@ -190,7 +200,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                     .textTheme
                                     .headline4
                                     .copyWith(
-                                      color: Colors.red,
+                                      color: Colors.pink,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 16,
                                       // letterSpacing: 1.5,
@@ -209,7 +219,7 @@ class _CommentScreenState extends State<CommentScreen> {
                           children: [
                             Icon(
                               Icons.ios_share,
-                              color: Colors.red,
+                              color: Colors.pink,
                               size: 25,
                             ),
                             SizedBox(
@@ -220,7 +230,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                     .textTheme
                                     .headline4
                                     .copyWith(
-                                      color: Colors.red,
+                                      color: Colors.pink,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 16,
                                       // letterSpacing: 1.5,
@@ -336,7 +346,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                     .headline4
                                     .copyWith(
                                       color: comment != ''
-                                          ? Colors.red
+                                          ? Colors.pink
                                           : Colors.black38,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 16,

@@ -23,6 +23,7 @@ dependencies:
   latlong: ^0.6.1
   flutter_map: any
   cached_network_image: ^2.3.3
+  readmore: ^1.0.0
 
 dev_dependencies:
   flutter_test:
