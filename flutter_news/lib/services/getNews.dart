@@ -4,6 +4,7 @@ import 'package:html/dom.dart' as dom;
 import 'dart:convert';
 import 'dart:core';
 import '../model/newsModel.dart';
+import '../model/commentModel.dart';
 
 class GetNews {
   List<News> newsData = [];
@@ -19,6 +20,7 @@ class GetNews {
       List<bool> _heartFill = [];
       List<bool> _heartState = [];
       List<int> _heartCount = [];
+      List<List<Comment>> _listDemoComments = [];
 
       final String url = 'https://minkithub.github.io/2020/11/04/news$i/';
       final http.Response response = await http.get(url);
@@ -45,9 +47,11 @@ class GetNews {
       newsContentsData.removeWhere((value) => value == '');
 
       newsContentsData.forEach((element) {
+        List<Comment> demoCommentsCopied = demoComments.toList();
         _heartFill.add(false);
         _heartState.add(true);
         _heartCount.add(35);
+        _listDemoComments.add(demoCommentsCopied);
       });
 
       // subheading이 없는 뉴스들이 있음.
@@ -59,7 +63,8 @@ class GetNews {
             content: newsContentsData,
             heartFill: _heartFill,
             heartState: _heartState,
-            heartCount: _heartCount));
+            heartCount: _heartCount,
+            listDemoComment: _listDemoComments));
       } else {
         newsData.add(News(
             heading: newsHeadingData[2],
@@ -68,7 +73,8 @@ class GetNews {
             content: newsContentsData,
             heartFill: _heartFill,
             heartState: _heartState,
-            heartCount: _heartCount));
+            heartCount: _heartCount,
+            listDemoComment: _listDemoComments));
       }
     }
     // 결과적으로 newsData에 모든 정보가 다 담겨있는 구조.

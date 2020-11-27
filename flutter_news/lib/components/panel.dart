@@ -245,7 +245,8 @@ class _PanelState extends State<Panel> {
                                                     SizedBox(
                                                       width: 5,
                                                     ),
-                                                    Text('187'),
+                                                    Text(
+                                                        '${newsData.listDemoComment[tagIndexListForListBuilder[index]].length}'),
                                                   ],
                                                 ),
                                               ),
@@ -276,12 +277,10 @@ class _PanelState extends State<Panel> {
                                                                 .heading,
                                                             author:
                                                                 newsData.author,
-                                                            historyContents: _newsController
-                                                                    .newsListData[
-                                                                        titleIndex]
-                                                                    .content[
-                                                                tagIndexListForListBuilder[
-                                                                    index]],
+                                                            historyContents:
+                                                                newsData.content[
+                                                                    tagIndexListForListBuilder[
+                                                                        index]],
                                                             routeIndex:
                                                                 titleIndex));
                                                   } else {
@@ -294,10 +293,7 @@ class _PanelState extends State<Panel> {
                                                     _newsController.newsHistory
                                                         .removeWhere((item) =>
                                                             item.historyContents ==
-                                                            _newsController
-                                                                    .newsListData[
-                                                                        titleIndex]
-                                                                    .content[
+                                                            newsData.content[
                                                                 tagIndexListForListBuilder[
                                                                     index]]);
                                                   }
@@ -326,7 +322,7 @@ class _PanelState extends State<Panel> {
                                                       width: 5,
                                                     ),
                                                     Text(
-                                                        '${_newsController.newsListData[titleIndex].heartCount[tagIndexListForListBuilder[index]]}'),
+                                                        '${newsData.heartCount[tagIndexListForListBuilder[index]]}'),
                                                   ],
                                                 ),
                                               ),

@@ -30,7 +30,7 @@ List<Comment> demoComments = [
   Comment(
       userName: 'dhtn****',
       commentDate: '2020.11.25. 10:31:22',
-      comment: '얼른 빨리 갈등이 봉합됐으면 하는 마음입니다.'),
+      comment: '얼른 갈등이 봉합됐으면 하는 마음입니다.'),
   Comment(
       userName: 'imme****',
       commentDate: '2020.11.25. 10:33:05',

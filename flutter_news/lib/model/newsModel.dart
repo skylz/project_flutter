@@ -1,3 +1,5 @@
+import '../model/commentModel.dart';
+
 // News 객체 모델링
 class News {
   final String heading;
@@ -7,6 +9,7 @@ class News {
   List<bool> heartFill;
   List<bool> heartState;
   List<int> heartCount;
+  List<List<Comment>> listDemoComment;
 
   News(
       {this.heading,
@@ -15,5 +18,6 @@ class News {
       this.content,
       this.heartFill,
       this.heartState,
-      this.heartCount});
+      this.heartCount,
+      this.listDemoComment});
 }

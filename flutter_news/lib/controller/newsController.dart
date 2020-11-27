@@ -14,6 +14,7 @@ class NewsController extends GetxController {
 
   List<String> photoList = ["money", "newspaper", "hoseini", "seoul"];
 
+  // 앱 실행 시 최초 실행
   @override
   void onInit() {
     _getNewsList();

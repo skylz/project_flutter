@@ -11,7 +11,7 @@ class HomeNewsScreen extends StatelessWidget {
       backgroundColor: Color(0xFFF3F5F7),
       appBar: AppBar(
         elevation: 0,
-        title: Text('DashBoard'),
+        title: Text('OffNews'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20, top: 5),
