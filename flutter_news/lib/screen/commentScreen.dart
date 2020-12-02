@@ -17,7 +17,6 @@ class _CommentScreenState extends State<CommentScreen> {
   final News newsData = Get.arguments[1];
   final int contentsIndex =
       Get.arguments[2]; //tagIndexListForListBuilder[index]
-  final int titleIndex = Get.arguments[3]; //titleIndex
 
   // 댓글을 처리하기 위함
   final TextEditingController _commentController = TextEditingController();
@@ -80,7 +79,7 @@ class _CommentScreenState extends State<CommentScreen> {
                         // letterSpacing: 1.5,
                         height: 1.3)),
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -144,7 +143,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                       author: newsData.author,
                                       historyContents:
                                           newsData.content[contentsIndex],
-                                      routeIndex: titleIndex));
+                                      routeIndex: _newsController.titleIndex));
                                 } else {
                                   // heartCount 감소
                                   newsData.heartCount[contentsIndex]--;
@@ -246,7 +245,7 @@ class _CommentScreenState extends State<CommentScreen> {
                   color: Colors.grey,
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Expanded(
                   child: ListView.builder(

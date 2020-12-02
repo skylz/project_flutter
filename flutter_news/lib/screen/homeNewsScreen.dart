@@ -68,8 +68,8 @@ class HomeNewsScreen extends StatelessWidget {
                                       )
                                     : null,
                                 onTap: () {
-                                  Get.toNamed('newsContentsScreen',
-                                      arguments: index);
+                                  _newsController.titleIndex = index;
+                                  Get.toNamed('newsContentsScreen');
                                 },
                               ),
                             ),

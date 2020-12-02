@@ -98,3 +98,11 @@ class SubstringHighlight extends StatelessWidget {
 //   }
 //   return children;
 // }
+
+// 앞으로의 뉴스는 커뮤니티 위주로 소비가 될 것이다.
+// 빨리빨리 소비되어야할 뉴스와 그렇지 않은 뉴스를 구분해라.
+// 신뢰감있는 댓글 유저들을 확보하는게 중요
+// 대중은 뉴스를 소비하는 스펙트럼이 생각보다 넓지 않아 그래서 타켓팅을 세밀하게 해라
+// 지금의 ui 형식은 20후 ~ 30의 전문직
+// feedly
+// hegemony

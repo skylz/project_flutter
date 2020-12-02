@@ -16,7 +16,7 @@ class NewsContentsScreen extends StatefulWidget {
 
 class _NewsContentsScreen extends State<NewsContentsScreen> {
   final NewsController _newsController = Get.put(NewsController());
-  final int titleIndex = Get.arguments;
+  // final int titleIndex = Get.arguments;
   final double _initFabHeight = 120.0;
 
   // Contain All News Data
@@ -39,6 +39,7 @@ class _NewsContentsScreen extends State<NewsContentsScreen> {
   void initState() {
     _newsController.getBackGroundImage();
     _fabHeight = _initFabHeight;
+    int titleIndex = _newsController.titleIndex;
     newsData = _newsController.newsListData[titleIndex];
     _singleQuotation(newsData.content);
     mapToTag(singleQuotationText);

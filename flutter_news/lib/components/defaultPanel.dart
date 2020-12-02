@@ -10,11 +10,10 @@ class DefaultPanel extends StatelessWidget {
   DefaultPanel({this.context, this.sc});
 
   final NewsController _newsController = Get.put(NewsController());
-  final int titleIndex = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    News newsData = _newsController.newsListData[titleIndex];
+    News newsData = _newsController.newsListData[_newsController.titleIndex];
     return MediaQuery.removePadding(
         context: context,
         removeTop: true,

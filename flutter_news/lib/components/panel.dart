@@ -23,7 +23,6 @@ class Panel extends StatefulWidget {
 
 class _PanelState extends State<Panel> {
   final NewsController _newsController = Get.put(NewsController());
-  final int titleIndex = Get.arguments;
   News newsData;
 
   // for UI
@@ -37,7 +36,7 @@ class _PanelState extends State<Panel> {
 
   @override
   void initState() {
-    newsData = _newsController.newsListData[titleIndex];
+    newsData = _newsController.newsListData[_newsController.titleIndex];
     tagList = widget.tagIndexMap.keys.toList().sublist(1);
     tagList.sort((a, b) => a.length.compareTo(b.length));
     tagList.insert(0, "기사전문");
@@ -235,7 +234,6 @@ class _PanelState extends State<Panel> {
                                                         newsData,
                                                         tagIndexListForListBuilder[
                                                             index],
-                                                        titleIndex
                                                       ]);
                                                 },
                                                 child: Row(
@@ -282,7 +280,8 @@ class _PanelState extends State<Panel> {
                                                                     tagIndexListForListBuilder[
                                                                         index]],
                                                             routeIndex:
-                                                                titleIndex));
+                                                                _newsController
+                                                                    .titleIndex));
                                                   } else {
                                                     // heartCount 감소
                                                     newsData.heartCount[
@@ -316,7 +315,7 @@ class _PanelState extends State<Panel> {
                                                           ? Icons.favorite
                                                           : Icons
                                                               .favorite_border,
-                                                      color: Colors.red,
+                                                      color: Colors.pink,
                                                     ),
                                                     SizedBox(
                                                       width: 5,

@@ -15,7 +15,6 @@ class NewsTitleScreen extends StatefulWidget {
 
 class _NewsTitleScreenState extends State<NewsTitleScreen> {
   final NewsController _newsController = Get.put(NewsController());
-  final int titleIndex = Get.arguments;
   News newsData;
 
   // 태그 List
@@ -24,6 +23,7 @@ class _NewsTitleScreenState extends State<NewsTitleScreen> {
 
   @override
   void initState() {
+    int titleIndex = _newsController.titleIndex;
     newsData = _newsController.newsListData[titleIndex];
     tagList = widget.tagIndexMap.keys.toList().sublist(1);
     // tag를 글자 길이 순으로 정렬.

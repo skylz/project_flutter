@@ -12,11 +12,6 @@ class _HistoryContentsState extends State<HistoryContents> {
   final NewsController _newsController = Get.put(NewsController());
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF3F5F7),

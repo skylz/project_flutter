@@ -11,6 +11,7 @@ class NewsController extends GetxController {
   var newsTagData = List<Tags>().obs;
   var newsHistory = List<NewsHistory>().obs;
   var backGround;
+  int titleIndex;
 
   List<String> photoList = ["money", "newspaper", "hoseini", "seoul"];
 
